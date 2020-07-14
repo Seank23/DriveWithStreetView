@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col">
+    <div class="card card-body">
+      <google-map
+        height="500px"
+        width="100%"
+        [zoom]="zoom"
+        [center]="center"
+        [options]="options"
+        (mapClick)="click($event)"
+        (mapDrag)="setCenter()"
+        (zoomChanged)="setCenter()"
+      >
+        <map-marker
+          #markerElem
+          *ngFor="let marker of markers"
+          [position]="marker.position"
+          [label]="marker.label"
+          [title]="marker.title"
+          [options]="marker.options"
+          (mapClick)="openInfo(markerElem, marker.info)"
+        >
+        </map-marker>
+
+        <map-info-window>{{ infoContent }}</map-info-window>
+      </google-map>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card card-body">
+      <div id="street-view">
+
+      </div>
+    </div>
+  </div>
+</div>
