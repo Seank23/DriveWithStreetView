@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunicationService } from '../communication.service'
 
 @Component({
   selector: 'app-street-view',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StreetViewComponent implements OnInit {
 
-  constructor() { }
+  streetView: google.maps.StreetViewPanorama;
+
+  constructor(private comms: CommunicationService) { }
 
   ngOnInit() {
+    this.streetView = new google.maps.StreetViewPanorama(document.getElementById("street-view"));
+    this.comms.currentCoords.subscribe(message => this.updateStreetView(message));
+    navigator.geolocation.getCurrentPosition(position => {
+      this.updateStreetView([position.coords.latitude, position.coords.longitude]);
+    });
   }
 
+  updateStreetView(coords: number[]) {
+    this.streetView.setPosition(new google.maps.LatLng(coords[0], coords[1]));
+  }
 }

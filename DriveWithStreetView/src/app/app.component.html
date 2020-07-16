@@ -1,6 +1,9 @@
 <body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
+  <div class="wrap">
+    <app-nav-menu class="top"></app-nav-menu>
+    <div class="container card card-body">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="bottom"></div>
   </div>
 </body>
