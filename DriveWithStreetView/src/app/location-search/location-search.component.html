@@ -1,9 +1,9 @@
 <div class="map card card-body">
   <div class="row">
     <div class="col-8">
-      <input class="form-control" id="locationSearch" placeholder="Search Location">
+      <input class="form-control" id="locationSearch" placeholder="Search Location" #searchTerm>
     </div>
-    <button class="btn btn-primary" id="searchBtn">Search</button>
+    <button class="btn btn-primary" id="searchBtn" (click)="geocodeLocation(searchTerm.value)">Search</button>
   </div>
   <div class="card">
     <div class="mapHeader row card-body">
@@ -17,8 +17,6 @@
       [center]="center"
       [options]="options"
       (mapClick)="click($event)"
-      (mapDrag)="setCenter()"
-      (zoomChanged)="setCenter()"
     >
       <map-marker
         #markerElem

@@ -8,7 +8,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { MapComponent } from './map/map.component';
+import { LocationSearchComponent } from './location-search/location-search.component';
 import { StreetViewComponent } from './street-view/street-view.component';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { StreetViewComponent } from './street-view/street-view.component';
       AppComponent,
       HomeComponent,
       NavMenuComponent,
-      MapComponent,
+      LocationSearchComponent,
       StreetViewComponent
    ],
    imports: [

@@ -14,7 +14,7 @@ export class StreetViewComponent implements OnInit {
 
   ngOnInit() {
     this.streetView = new google.maps.StreetViewPanorama(document.getElementById("street-view"));
-    this.comms.currentCoords.subscribe(message => this.updateStreetView(message));
+    this.comms.currentCoords.subscribe(coords => this.updateStreetView(coords));
     navigator.geolocation.getCurrentPosition(position => {
       this.updateStreetView([position.coords.latitude, position.coords.longitude]);
     });
