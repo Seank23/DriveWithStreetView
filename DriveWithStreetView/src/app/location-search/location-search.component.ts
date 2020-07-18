@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { CommunicationService } from '../communication.service'
-import $ from "jquery";
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-location-search',
@@ -28,8 +28,9 @@ export class LocationSearchComponent implements OnInit {
   }
   markers = [];
   mapState = "Show";
+  showMap: boolean = false;
 
-  constructor(private comms: CommunicationService) { }
+  constructor(private comms: CommunicationService, private http: HttpService) { }
 
   ngOnInit() {
 
@@ -57,15 +58,12 @@ export class LocationSearchComponent implements OnInit {
 
   showHideMap() {
 
-    $(".map").toggleClass("expand");
-    if($(".map").hasClass("expand")) {
-      this.mapState = "Hide";
-      $("#mapContainer").fadeIn(400);
-    }
-    else {
-      this.mapState = "Show";
-      $("#mapContainer").hide();
-    }
+    this.showMap = !this.showMap;
+
+    if (this.showMap)
+      this.mapState = 'Hide';
+    else
+      this.mapState = 'Show';
   }
 
   setMapLocation(lat, lng) {
@@ -81,7 +79,7 @@ export class LocationSearchComponent implements OnInit {
     var myClass = this;
     this.geocoder.geocode({'address': searchTerm}, function(results, status) {
       if (status == 'OK') {
-        console.log(results[0].geometry.location.toString());
+        console.log(results);
         myClass.findNearestRoad(results[0].geometry.location.lat(), results[0].geometry.location.lng());
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
@@ -92,12 +90,9 @@ export class LocationSearchComponent implements OnInit {
   findNearestRoad(lat, lng) {
 
     var myClass = this;
-    $.ajax({
-      url: `https://roads.googleapis.com/v1/nearestRoads?points=${lat},${lng}&key=AIzaSyBogsOu9jd3xOUwtf4MN1ic91Qg8ij5yO0`,
-      success: function(result){
-        console.log(result);
-        myClass.updateLocation(Number(result.snappedPoints[0].location.latitude.toFixed(6)), Number(result.snappedPoints[0].location.longitude.toFixed(6)));
-      }
+    this.http.getNearestRoad(lat, lng).subscribe(result => {
+      console.log(result);
+      myClass.updateLocation(Number(result['snappedPoints'][0].location.latitude.toFixed(6)), Number(result['snappedPoints'][0].location.longitude.toFixed(6)));
     });
   }
 }

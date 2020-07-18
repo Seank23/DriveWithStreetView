@@ -1,4 +1,4 @@
-<div class="map card card-body">
+<div class="map card card-body" [ngClass]="{'expand': showMap}">
   <div class="row">
     <div class="col-8">
       <input class="form-control" id="locationSearch" placeholder="Search Location" #searchTerm>
@@ -9,7 +9,7 @@
     <div class="mapHeader row card-body">
       <button class="btn btn-outline-primary" id="showMapBtn" (click)="showHideMap()" style="width: 100%;">{{mapState}} Map</button>
     </div>
-    <div class="hide pt-2" id="mapContainer">
+    <div class="pt-2 hide" [hidden]="!showMap" id="mapContainer">
       <google-map
       height="28.5vh"
       width="100%"

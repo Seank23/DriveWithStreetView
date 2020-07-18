@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxNavbarModule, IgxIconModule } from 'igniteui-angular';
 import { GoogleMapsModule } from '@angular/google-maps'
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -27,7 +28,8 @@ import { StreetViewComponent } from './street-view/street-view.component';
       BrowserAnimationsModule,
       IgxNavbarModule,
       IgxIconModule,
-      GoogleMapsModule
+      GoogleMapsModule,
+      HttpClientModule
    ],
    providers: [],
    bootstrap: [
