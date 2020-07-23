@@ -5,12 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxNavbarModule, IgxIconModule } from 'igniteui-angular';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { HttpClientModule } from '@angular/common/http'
+import { Ng5SliderModule } from 'ng5-slider';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LocationSearchComponent } from './location-search/location-search.component';
 import { StreetViewComponent } from './street-view/street-view.component';
+import { ControlsComponent } from './controls/controls.component';
 
 @NgModule({
    declarations: [
@@ -18,7 +20,8 @@ import { StreetViewComponent } from './street-view/street-view.component';
       HomeComponent,
       NavMenuComponent,
       LocationSearchComponent,
-      StreetViewComponent
+      StreetViewComponent,
+      ControlsComponent
    ],
    imports: [
       BrowserModule,
@@ -29,7 +32,8 @@ import { StreetViewComponent } from './street-view/street-view.component';
       IgxNavbarModule,
       IgxIconModule,
       GoogleMapsModule,
-      HttpClientModule
+      HttpClientModule,
+      Ng5SliderModule
    ],
    providers: [],
    bootstrap: [

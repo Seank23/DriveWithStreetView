@@ -1,0 +1,9 @@
+<div class="controls card card-body">
+  <div class="row mb-3">
+    <span class="col-2 pl-1 pt-4"><label for="stepSlider">Steps:</label></span>
+    <span class="col-10"><ng5-slider id=stepSlider [(value)]="stepValue" [options]="stepOptions" (valueChange)="onStepChange()"></ng5-slider></span>
+  </div>
+  <div class="row">
+    <button class="btn btn-outline-primary" id="nextBtn" (click)="onNext()" style="width: 100%;">Next</button>
+  </div>
+</div>
