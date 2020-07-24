@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { GoogleMap } from '@angular/google-maps';
 import { CommunicationService } from '../communication.service'
 import { HttpService } from '../http.service';
@@ -6,7 +7,21 @@ import { HttpService } from '../http.service';
 @Component({
   selector: 'app-location-search',
   templateUrl: './location-search.component.html',
-  styleUrls: ['./location-search.component.scss']
+  styleUrls: ['./location-search.component.scss'],
+  animations: [
+    trigger('focus', [
+      state('unfocus', style({ opacity: 0.2 })),
+      state('focus', style({ opacity: 0.9 })),
+      transition('unfocus=>focus', animate('200ms')),
+      transition('focus=>unfocus', animate('200ms'))
+    ]),
+     trigger('showMap', [
+      state('Show', style({ height: '120px' })),
+      state('Hide', style({ height: '420px' })),
+      transition('Show=>Hide', animate('100ms')),
+      transition('Hide=>Show', animate('100ms'))
+    ]),
+  ]
 })
 export class LocationSearchComponent implements OnInit {
 
@@ -29,6 +44,15 @@ export class LocationSearchComponent implements OnInit {
   markers = [];
   mapState = "Show";
   showMap: boolean = false;
+  animState = 'unfocus';
+
+  setAnim(state) {
+
+    if(this.showMap)
+      this.animState = 'focus';
+    else
+      this.animState = state;
+  }
 
   constructor(private comms: CommunicationService, private http: HttpService) { }
 

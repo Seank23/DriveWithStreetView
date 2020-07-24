@@ -1,4 +1,4 @@
-<div class="map card card-body" [ngClass]="{'expand': showMap}">
+<div class="map card card-body" [@showMap]=mapState (mouseover)="setAnim('focus')" (mouseleave)="setAnim('unfocus')" [@focus]=animState>
   <div class="row">
     <div class="col-8">
       <input class="form-control" id="locationSearch" placeholder="Search Location" #searchTerm>
